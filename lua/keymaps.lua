@@ -1,35 +1,63 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Clear highlights on search when pressing <Esc> in normal mode
+local map = vim.keymap
+
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
+-- Clear highlights on search when pressing <Esc> in normal mode
+map.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- remap 'jf' to the <esc> key in insert and visual mode
+map.set('i', 'kj', '<ESC>')
+map.set('v', 'kj', '<ESC>')
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- map <leader>pv to the command that opens the explorer
+map.set('n', '<leader>pv', ':Ex<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- highlight text and move it around
+map.set('v', 'J', ":m '>+1<CR>gv=gv")
+map.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- keep cursor in the middle of the page while jumping by half pages
+map.set('n', '<C-d>', '<C-d>zz')
+map.set('n', '<C-u>', '<C-u>zz')
+
+-- keep cursor in the middle while cycling through returned search terms
+map.set('n', 'n', 'nzzzv')
+map.set('n', 'N', 'Nzzzv')
+
+-- delete hightlighted word into void paste buffer
+-- effectively, copy foo, paste over bar, keep foo in vim clipboard rather than have bar replace it
+map.set('x', '<leader>p', '"_dP')
+
+-- yank into system clipboard instead of vim's
+map.set('n', '<leader>y', '"+y')
+map.set('v', '<leader>y', '"+y')
+map.set('n', '<leader>Y', '"+Y')
+
+-- don't ever press Q. Apparantly it really sucks.
+map.set('n', 'Q', '<nop>')
+
+-- replace the word that your cursor is on
+map('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- split window vertically
+map.set('n', '<leader>|', ':vsp<CR>')
+
+-- split window horizontally
+map.set('n', '<leader>-', ':split<CR>')
+
+--remove search highlight
+map.set('n', '<leader>nhl', ':nohlsearch<CR>')
+
+-- if the spacebar is pressed in normal or visual mode without anything after it, do nothing.
+map.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- delete to void register
+map.set('n', '<leader>d', "'_d")
+map.set('v', '<leader>d', "'_d")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
