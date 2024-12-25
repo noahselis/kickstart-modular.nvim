@@ -41,7 +41,7 @@ map.set('n', '<leader>Y', '"+Y')
 map.set('n', 'Q', '<nop>')
 
 -- replace the word that your cursor is on
-map('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+map.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- split window vertically
 map.set('n', '<leader>|', ':vsp<CR>')

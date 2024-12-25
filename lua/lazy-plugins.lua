@@ -20,29 +20,32 @@ require('lazy').setup({
   -- Use `opts = {}` to force a plugin to be loaded.
   --
 
-
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
 
-  require 'kickstart/plugins/gitsigns',
+  require 'noah/plugins/gitsigns',
 
-  require 'kickstart/plugins/which-key',
+  require 'noah/plugins/telescope',
 
-  require 'kickstart/plugins/telescope',
+  require 'noah/plugins/lspconfig',
 
-  require 'kickstart/plugins/lspconfig',
+  require 'noah/plugins/conform',
 
-  require 'kickstart/plugins/conform',
+  require 'noah/plugins/cmp',
 
-  require 'kickstart/plugins/cmp',
+  require 'noah/plugins/tokyonight',
 
-  require 'kickstart/plugins/tokyonight',
+  require 'noah/plugins/todo-comments',
 
-  require 'kickstart/plugins/todo-comments',
+  require 'noah/plugins/mini',
 
-  require 'kickstart/plugins/mini',
+  require 'noah/plugins/treesitter',
 
-  require 'kickstart/plugins/treesitter',
+  require 'noah/plugins/harpoon',
+
+  require 'noah/plugins/markdown-preview',
+
+  require 'noah/plugins/zen-mode',
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
