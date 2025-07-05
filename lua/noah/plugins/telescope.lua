@@ -53,13 +53,35 @@ return {
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
+        file_ignore_patterns = {
+          'node_modules',
+          'undodir',
+          'public',
+          'dist',
+          'build',
+          'target',
+          '.webm',
+          '.ogg',
+          '.zip',
+          '.tar.gz',
+          '.rar',
+          '.7z',
+          '.exe',
+          '.ttf',
+          '.otf',
+          '.woff',
+          '.woff2',
+          '.eot',
+          '.ico',
+          '.webp',
+          'fonts/*',
+        },
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         -- defaults = {
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
         -- },
         -- pickers = {}
         extensions = {
